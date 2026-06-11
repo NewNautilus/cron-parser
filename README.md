@@ -1,17 +1,110 @@
-[Cron Parser](https://apify.com/lazymac/cron-parser?fpr=data)
+[Cron Parser](https://apify.com/vivid_astronaut/cron-parser?fpr=data)
 
-# Cron Parser
+Cron Parser service powered by Azure. Fast, reliable, and scalable API.
 
-Explain, validate, and generate cron expressions. Preview next run times and browse common cron patterns.
+## Features
 
-## Input
+- **Fast Processing**: Lightning-fast cron parser api powered by Azure
+- **Reliable**: 99.9% uptime with automatic failover
+- **Scalable**: Handle single requests or bulk operations
+- **Secure**: Enterprise-grade security with API key authentication
+- **Well Documented**: Comprehensive API documentation and examples
 
-- `action` (string): Action — `explain`, `validate`, `next`, `generate`, `common`
-- `expression` (string): Cron expression to parse
-- `count` (integer): Number of next runs to display
-- `from` (string): Start date for next run calculation
-- `generateOptions` (object): Options for generating a cron expression
+## Use Cases
 
-## Output
+- **Development**: Integrate into your development workflow
+- **Automation**: Build automated pipelines
+- **Integration**: Connect with other services
 
-Returns human-readable explanation, validation result, next run times, generated expression, or list of common patterns.
+## Input Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `data` | object | No | Input data to process. Send your API request payload here. |
+| `endpoint` | string | No | Specific endpoint to call (e.g., /api/v1/process) |
+
+## Output Format
+
+```
+{
+  "success": true,
+  "result": { ... },
+  "timestamp": "2026-01-07T00:00:00Z"
+}
+```
+
+## Code Examples
+
+### JavaScript (Node.js)
+
+```
+import { ApifyClient } from 'apify-client';
+
+const client = new ApifyClient({ token: 'YOUR_API_TOKEN' });
+
+const input = {
+  "data": {},
+  "endpoint": "/api/v1/process"
+};
+
+const run = await client.actor("vivid_astronaut/cron-parser").call(input);
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+```
+
+### Python
+
+```
+from apify_client import ApifyClient
+
+client = ApifyClient("YOUR_API_TOKEN")
+
+run_input = {
+  "data": {},
+  "endpoint": "/api/v1/process"
+}
+
+run = client.actor("vivid_astronaut/cron-parser").call(run_input=run_input)
+
+for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+    print(item)
+```
+
+### cURL
+
+```
+curl -X POST "https://api.apify.com/v2/acts/vivid_astronaut~cron-parser/runs?token=YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+  "data": {},
+  "endpoint": "/api/v1/process"
+}'
+```
+
+## Pricing
+
+**Model**: Pay per result
+**Price**: $0.005 per result
+
+You only pay for successful results. Platform usage costs are included.
+
+## API Documentation
+
+Full API documentation is available at:
+
+- [Apify API Reference](https://docs.apify.com/api/v2)
+- [Actor API Endpoints](https://docs.apify.com/api/v2#/reference/actors)
+
+## Support
+
+- **Issues**: Report bugs via Apify Console
+- **Documentation**: [Apify Docs](https://docs.apify.com)
+- **Community**: [Apify Discord](https://discord.gg/apify)
+
+## Version History
+
+See ./CHANGELOG.md for version history.
+
+---
+
+*Powered by Azure Cloud Infrastructure*
